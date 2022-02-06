@@ -1,0 +1,326 @@
+
+if game:GetService("CoreGui"):FindFirstChild("Mana") then
+    game:GetService("CoreGui"):FindFirstChild("Mana"):Destroy()
+end
+
+local UIlib = loadstring(game:HttpGet("https://pastebin.com/raw/ZjHQa1yw"))()
+local Win = UIlib:Window("PJM", "One Piece: Bursting Rage")
+
+local TabFarm = Win:Tab("Autofarm")
+local Stats = Win:Tab("Stats")
+local TP = Win:Tab("Teleport")
+local Credits = Win:Tab("Credits")
+local plr = game:GetService("Players").LocalPlayer
+
+function CheckQuest()
+local MyLevel = game:GetService("Players").LocalPlayer.PlayerValues.Level.Value
+if MyLevel == 0 or MyLevel <= 9 then
+    Ms = "Bandit"
+    CFrameQuest = game:GetService("Workspace").QuestBoard.QuestBoard.BanditQuest.CFrame
+    NameModel = "QuestBoard"
+    NameQuest = "BanditQuest"
+elseif MyLevel == 10 or MyLevel <= 29 then
+    Ms = "Buggy Pirate"
+    CFrameQuest = game:GetService("Workspace").QuestBoard.QuestBoardFoosha.BuggyPirateQuest.CFrame
+    NameModel = "QuestBoardFoosha"
+    NameQuest = "BuggyPirateQuest"
+elseif MyLevel == 30 or MyLevel <= 79 then
+    Ms = "Buggy D. Clown"
+    CFrameQuest = game:GetService("Workspace").QuestBoard.QuestBoardFoosha.BuggyQuest.CFrame
+    NameModel = "QuestBoardFoosha"
+    NameQuest = "BuggyQuest"
+elseif MyLevel == 80 or MyLevel <= 174 then
+    Ms = "Corupt Marine"
+    CFrameQuest = game:GetService("Workspace").QuestBoard.QuestBoardMarine.MarineQuest.CFrame
+    NameModel = "QuestBoardMarine"
+    NameQuest = "MarineQuest"
+elseif MyLevel >= 175 then
+    Ms = "Smoker"
+    CFrameQuest = game:GetService("Workspace").Map.Islands.LogueTown.smokerQuest.CFrame
+    NameModel = "LogueTown"
+    NameQuest = "smokerQuest"
+end
+end
+
+local IngameLVL = TabFarm:Label("Your LvL: ")
+spawn(function()
+while task.wait() do
+    IngameLVL:Refresh('Your LvL: ' .. game:GetService("Players").LocalPlayer.PlayerValues.Level.Value)
+end
+end)
+
+selectedWeapon = ""
+local weapon = {}
+for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+    if v:IsA("Tool") then
+        table.insert(weapon, v.Name)
+     end
+end
+
+for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+    if v:IsA("Tool") then
+        table.insert(weapon, v.Name)
+     end
+end
+
+TabFarm:Dropdown("Select Weapon", weapon, function(v)
+selectedWeapon = v
+end)
+
+TabFarm:Toggle("Quest Autofarm", false, function(t)
+    if selectedWeapon == "" then
+        UIlib:Notification("Notification", "Select A Weapon First!")
+    else
+StartFarm = t
+end
+end)
+
+
+spawn(function()
+    while task.wait() do
+        if StartFarm then
+            pcall(function()
+                CheckQuest()
+                if game:GetService("Workspace").QuestBoard[NameModel]:FindFirstChild(NameQuest) then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrameQuest
+                            for _,v in pairs(game:GetService("Workspace").QuestBoard[NameModel]:GetDescendants()) do
+                                if v:IsA("ClickDetector") then
+                                    fireclickdetector(v)
+                                end
+                            end
+                        end
+                    if game:GetService("Players").LocalPlayer.PlayerGui.QuestsGUI.MainFrame.Visible == true then
+                        for i,v in pairs(game:GetService("Workspace").Map.Live:GetChildren()) do
+                            if v.Name == Ms and v.Humanoid.Health > 0 then
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,4)
+                            end
+                        end
+                end -- if end
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while task.wait() do
+        if StartFarm or StartselectedEnemyFarm then
+           pcall(function()
+            game:GetService("ReplicatedStorage").RemoteEvents.CombatBase:FireServer()
+            local ohInstance1 = game.Players.LocalPlayer.Character[selectedWeapon]
+
+            game:GetService("ReplicatedStorage").RemoteEvents.KatanaBase:FireServer(ohInstance1)
+           end)
+        end
+    end
+end)
+
+TabFarm:line()
+
+local Enemies = {
+'Bandit',
+'Buggy Pirate',
+'Corupt Marine',
+'Desert Bandit',
+'Crocodile',
+'Yeti',
+'Kuro',
+'Kuro Pirate',
+'Smoker',
+'Buggy D. Clown',
+}
+
+TabFarm:Dropdown("Select Enemy", Enemies, function(v)
+SelectEnemy = v
+end)
+
+TabFarm:Toggle("Farm Selected Enemy", false, function(t)
+    if selectedWeapon == "" then
+        UIlib:Notification("Notification", "Select A Weapon First!")
+    else
+StartselectedEnemyFarm = t
+    end
+end)
+
+spawn(function()
+    while task.wait() do
+        if StartselectedEnemyFarm then
+            pcall(function()
+                for i,v in pairs(game:GetService("Workspace").Map.Live:GetChildren()) do
+                    if v.Name == SelectEnemy and v:FindFirstChild("Humanoid").Health > 0 then
+                        plr.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0,0,4)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+TabFarm:Toggle("Instant Kill (Only Selected Enemy)", false, function(t)
+InstantKil = t
+end)
+
+spawn(function()
+    while task.wait() do
+        if InstantKil then
+            pcall(function()
+                for i,v in pairs(game:GetService("Workspace").Map.Live:GetChildren()) do
+                    if v.Name == SelectEnemy then
+                        v.HumanoidRootPart.CFrame = plr.Character.HumanoidRootPart.CFrame * CFrame.new(0,0,-5)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+spawn(function()
+    while task.wait() do
+        if InstantKil then
+            pcall(function()
+                for i,v in pairs(game:GetService("Workspace").Map.Live:GetChildren()) do
+                    if v.Name == SelectEnemy --[[and v:FindFirstChild("Humanoid").Health > 0]] then
+                        v.Humanoid.Health = 0
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+
+TabFarm:line()
+
+TabFarm:Toggle("Chest Farm", false, function(t)
+StartChestFarm = t
+end)
+
+spawn(function()
+    while task.wait() do
+        if StartChestFarm then
+            pcall(function()
+                for _,v in pairs(game:GetService("Workspace").Map.Chests:GetDescendants()) do
+                    if v:IsA("TouchTransmitter") then
+                        firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart"), v.Parent, 0)
+                        firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart"), v.Parent, 1)
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+
+spawn(function()
+    while task.wait() do
+        if StartFarm or StartselectedEnemyFarm then
+           pcall(function()
+              if game.Players.LocalPlayer.Backpack:FindFirstChild(selectedWeapon) then
+                  local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(selectedWeapon)
+                  wait(.5)
+                  game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+               end
+           end)
+        end
+    end
+end)
+
+local Poi2 = Stats:Label("Your Points: ")
+spawn(function()
+while task.wait() do
+Poi2:Refresh('Your Points: ' .. game:GetService("Players").LocalPlayer.PlayerValues.StatPoints.Value)
+end
+end)
+
+Stats:Toggle("Strength", false, function(t)
+    Strength = t
+    while Strength do task.wait(.5)
+        pcall(function()
+            -- This script was generated by Hydroxide's RemoteSpy: https://github.com/Upbolt/Hydroxide
+
+local ohInstance1 = game:GetService("Players").LocalPlayer.PlayerValues
+local ohInstance2 = game:GetService("Players").LocalPlayer.PlayerValues.StrengthLevel
+local ohInstance3 = game:GetService("Players").LocalPlayer.PlayerValues.DefenseLevel
+local ohInstance4 = game:GetService("Players").LocalPlayer.PlayerValues.SwordLevel
+local ohInstance5 = game:GetService("Players").LocalPlayer.PlayerValues.GunLevel
+local ohInstance6 = game:GetService("Players").LocalPlayer.PlayerValues.StrengthLevel
+local ohNumber7 = 1
+
+game:GetService("ReplicatedStorage").RemoteEvents.StatPoint:InvokeServer(ohInstance1, ohInstance2, ohInstance3, ohInstance4, ohInstance5, ohInstance6, ohNumber7)
+        end)
+    end
+end)
+
+Stats:Toggle("Defense", false, function(t)
+    Defense = t
+    while Defense do task.wait(.5)
+        pcall(function()
+            -- This script was generated by Hydroxide's RemoteSpy: https://github.com/Upbolt/Hydroxide
+
+local ohInstance1 = game:GetService("Players").LocalPlayer.PlayerValues
+local ohInstance2 = game:GetService("Players").LocalPlayer.PlayerValues.StrengthLevel
+local ohInstance3 = game:GetService("Players").LocalPlayer.PlayerValues.DefenseLevel
+local ohInstance4 = game:GetService("Players").LocalPlayer.PlayerValues.SwordLevel
+local ohInstance5 = game:GetService("Players").LocalPlayer.PlayerValues.GunLevel
+local ohInstance6 = game:GetService("Players").LocalPlayer.PlayerValues.DefenseLevel
+local ohNumber7 = 1
+
+game:GetService("ReplicatedStorage").RemoteEvents.StatPoint:InvokeServer(ohInstance1, ohInstance2, ohInstance3, ohInstance4, ohInstance5, ohInstance6, ohNumber7)
+        end)
+    end
+end)
+
+Stats:Toggle("Sword", false, function(t)
+    Sword = t
+    while Sword do task.wait(.5)
+        pcall(function()
+            -- This script was generated by Hydroxide's RemoteSpy: https://github.com/Upbolt/Hydroxide
+
+local ohInstance1 = game:GetService("Players").LocalPlayer.PlayerValues
+local ohInstance2 = game:GetService("Players").LocalPlayer.PlayerValues.StrengthLevel
+local ohInstance3 = game:GetService("Players").LocalPlayer.PlayerValues.DefenseLevel
+local ohInstance4 = game:GetService("Players").LocalPlayer.PlayerValues.SwordLevel
+local ohInstance5 = game:GetService("Players").LocalPlayer.PlayerValues.GunLevel
+local ohInstance6 = game:GetService("Players").LocalPlayer.PlayerValues.SwordLevel
+local ohNumber7 = 1
+
+game:GetService("ReplicatedStorage").RemoteEvents.StatPoint:InvokeServer(ohInstance1, ohInstance2, ohInstance3, ohInstance4, ohInstance5, ohInstance6, ohNumber7)
+        end)
+    end
+end)
+
+Stats:Toggle("Gun", false, function(t)
+    Gun = t
+    while Gun do task.wait(.5)
+        pcall(function()
+            local ohInstance1 = game:GetService("Players").LocalPlayer.PlayerValues
+local ohInstance2 = game:GetService("Players").LocalPlayer.PlayerValues.StrengthLevel
+local ohInstance3 = game:GetService("Players").LocalPlayer.PlayerValues.DefenseLevel
+local ohInstance4 = game:GetService("Players").LocalPlayer.PlayerValues.SwordLevel
+local ohInstance5 = game:GetService("Players").LocalPlayer.PlayerValues.GunLevel
+local ohInstance6 = game:GetService("Players").LocalPlayer.PlayerValues.GunLevel
+local ohNumber7 = 1
+
+game:GetService("ReplicatedStorage").RemoteEvents.StatPoint:InvokeServer(ohInstance1, ohInstance2, ohInstance3, ohInstance4, ohInstance5, ohInstance6, ohNumber7)
+
+        end)
+    end
+end)
+
+local npctp = {}
+for i,v in pairs(game:GetService("Workspace").Map.NPCs:GetChildren()) do
+    if v:IsA("Model") then
+        table.insert(npctp,v.Name)
+    end
+end
+
+TP:Dropdown("select NPC", npctp, function(v)
+SlectedNPC = v
+end)
+
+TP:Button("TP no selected NPC", function()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Map.NPCs[SlectedNPC].Head.CFrame
+end)
+
+Credits:Button("Mana#9724", function()
+setclipboard("Mana#9724")
+end)
