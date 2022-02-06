@@ -4,7 +4,7 @@ if game:GetService("CoreGui"):FindFirstChild("Mana") then
 end
 
 local UIlib = loadstring(game:HttpGet("https://pastebin.com/raw/ZjHQa1yw"))()
-local Win = UIlib:Window("PJM", "One Piece: Bursting Rage")
+local Win = UIlib:Window("Project Meow", "Bursting Rage")
 
 local TabFarm = Win:Tab("Autofarm")
 local Stats = Win:Tab("Stats")
