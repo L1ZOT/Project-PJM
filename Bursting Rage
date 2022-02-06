@@ -324,3 +324,7 @@ end)
 Credits:Button("Mana#9724", function()
 setclipboard("Mana#9724")
 end)
+
+Credits:Button("Discord Server", function()
+    setclipboard("https://discord.gg/YFDHGtXgJV")
+end)
