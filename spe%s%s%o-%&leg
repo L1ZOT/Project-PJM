@@ -1,4 +1,4 @@
-local VLib = loadstring(game:HttpGet("https://pastebin.com/raw/Hs2PDiyF"))()
+local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/L1ZOT/Project-PJM/main/PKJMGUI"))()
 local Win = VLib:Window("Project Meow", "Speed of Legends")
 local Main = Win:Tab("Main")
 local Autofarm = Win:Tab("Autofarm")
