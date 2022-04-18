@@ -330,7 +330,7 @@ function Mainholder:Window(hubname, gamename)
    MenuBtn.Position = UDim2.new(-3.4289414e-07, 0, 0.454545468, 0)
    MenuBtn.Size = UDim2.new(1.00000072, 0, 0, 20)
    MenuBtn.Font = Enum.Font.Gotham
-   MenuBtn.Text = "Settings (Comming Soon)"
+   MenuBtn.Text = "Settings"
    MenuBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
    MenuBtn.TextSize = 13.000
    MenuBtn.TextTransparency = 0.400
