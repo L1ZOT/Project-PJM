@@ -96,40 +96,54 @@ local woof = Instance.new("ScreenGui")
 woof.Name = "woof"
 woof.Parent = game.CoreGui
 
-function Mainholder:Window(hubname, gamename, discordlink, halflink)
+function Mainholder:Window(hubname, gamename)
    local FirstTab = false
 
    local MainFrame = Instance.new("Frame")
    local MainCorner = Instance.new("UICorner")
    local LeftFrame = Instance.new("Frame")
    local LeftFrameCorner = Instance.new("UICorner")
-   local TabHolder = Instance.new("Frame")
+   local TabHolder = Instance.new("ScrollingFrame")
    local TabHoldLayout = Instance.new("UIListLayout")
    local DragFrame = Instance.new("Frame")
    local GameTitle = Instance.new("TextLabel")
    local MainTitle = Instance.new("TextLabel")
-   local lineY = Instance.new("Frame")
    local MainFrameholder = Instance.new("Frame")
-   local OpenClose = Instance.new("TextButton")
-   local OpenCloseCorner = Instance.new("UICorner")
    local Discord = Instance.new("TextButton")
    local DiscordCorner = Instance.new("UICorner")
-   local ScriptHub = Instance.new("TextButton")
-   local ScriptHubCorner = Instance.new("UICorner")
+   local DiscordPadding = Instance.new("UIPadding")
+   local MenuBtn = Instance.new("TextButton")
+   local MenuBtnCorner = Instance.new("UICorner")
+   local MenuBtnPadding = Instance.new("UIPadding")
+   local SettingsFrame = Instance.new("Frame")
+   local SettingsFrameCorner = Instance.new("UICorner")
+   local SettingsFrameShadow = Instance.new("Frame")
+   local SettingsFrameImage = Instance.new("ImageLabel")
+   local SettingsFrameImage_2 = Instance.new("ImageLabel")
+   local SettingsFrameLayout = Instance.new("UIListLayout")
    local Keybind = Instance.new("TextButton")
    local TextKeybind = Instance.new("TextLabel")
    local BindText = Instance.new("TextLabel")
-   local Glow = Instance.new("ImageLabel")
    local ContainerHold = Instance.new("Frame")
-   local TaTitle = Instance.new("TextLabel")
    local DragFrame2 = Instance.new("Frame")
-   local DragFrame2_2 = Instance.new("Frame")
+   local MainFrameContainerSearch = Instance.new("ScrollingFrame")
+   local MainFrameContainerSearchLayout = Instance.new("UIListLayout")
+   local SettingsButton = Instance.new("TextButton")
+   local ImageLabel = Instance.new("ImageLabel")
+
+   local MainSettingsFrame = Instance.new("Frame")
+   local MainSettingsDragFrame = Instance.new("Frame")
+   local MainSettingsFrameCorner = Instance.new("UICorner")
+   local MainSettingsContainer = Instance.new("ScrollingFrame")
+   local MainSettingsContainerLayout = Instance.new("UIListLayout")
+   local MainSettingsTitle = Instance.new("TextLabel")
+   local MainSettingsFrameClose = Instance.new("ImageButton")
 
    MainFrame.Name = "MainFrame"
    MainFrame.Parent = woof
    MainFrame.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
-   MainFrame.Position = UDim2.new(0.560168743, -325, 0.625403643, -250)
-   MainFrame.Size = UDim2.new(0, 0, 0, 0)
+   MainFrame.Position = UDim2.new(0.590548515, -325, 0.683814943, -250)
+   MainFrame.Size = UDim2.new(0, 650, 0, 410)
    -- 0, 650, 0, 410 ^^
    
    MainCorner.CornerRadius = UDim.new(0, 5)
@@ -139,10 +153,9 @@ function Mainholder:Window(hubname, gamename, discordlink, halflink)
    LeftFrame.Name = "LeftFrame"
    LeftFrame.Parent = MainFrame
    LeftFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-   LeftFrame.Position = UDim2.new(0, 0, 0, 0)
-   -- UDim2.new(-0.354520649, 0, 0.00472821482, 0) ^^
-   LeftFrame.Size = UDim2.new(0, 209, 0, 410)
-   LeftFrame.Visible = false
+   LeftFrame.BackgroundTransparency = 1.000
+   LeftFrame.Position = UDim2.new(0.5, -325, 0.609756112, -250)
+   LeftFrame.Size = UDim2.new(0, 199, 0, 350)
    
    LeftFrameCorner.CornerRadius = UDim.new(0, 5)
    LeftFrameCorner.Name = "LeftFrameCorner"
@@ -150,30 +163,19 @@ function Mainholder:Window(hubname, gamename, discordlink, halflink)
    
    TabHolder.Name = "TabHolder"
    TabHolder.Parent = LeftFrame
+   TabHolder.Active = true
    TabHolder.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
    TabHolder.BackgroundTransparency = 1.000
-   TabHolder.Position = UDim2.new(0.056721665, 0, 0.113540091, 0)
-   TabHolder.Size = UDim2.new(0, 187, 0, 335)
+   TabHolder.BorderSizePixel = 0
+   TabHolder.Position = UDim2.new(0.0520000011, 0, 0.214000002, 0)
+   TabHolder.Size = UDim2.new(0, 188, 0, 273)
+   TabHolder.ScrollBarThickness = 0
    
    TabHoldLayout.Name = "TabHoldLayout"
    TabHoldLayout.Parent = TabHolder
    TabHoldLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
    TabHoldLayout.SortOrder = Enum.SortOrder.LayoutOrder
    TabHoldLayout.Padding = UDim.new(0, 5)
-
-
-   Glow.Name = "Glow"
-   Glow.Parent = LeftFrame
-   Glow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-   Glow.BackgroundTransparency = 1.000
-   Glow.BorderSizePixel = 0
-   Glow.Position = UDim2.new(0, -15, 0, -15)
-   Glow.Size = UDim2.new(1, 30, 1, 30)
-   Glow.ZIndex = 0
-   Glow.Image = "rbxassetid://4996891970"
-   Glow.ImageColor3 = Color3.fromRGB(15, 15, 15)
-   Glow.ScaleType = Enum.ScaleType.Slice
-   Glow.SliceCenter = Rect.new(20, 20, 280, 280)
 
 
    DragFrame.Name = "DragFrame"
@@ -196,7 +198,6 @@ function Mainholder:Window(hubname, gamename, discordlink, halflink)
    GameTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
    GameTitle.TextSize = 17.000
    GameTitle.TextTransparency = 0.400
-   GameTitle.Visible = false
    
    MainTitle.Name = "MainTitle"
    MainTitle.Parent = MainFrame
@@ -208,15 +209,6 @@ function Mainholder:Window(hubname, gamename, discordlink, halflink)
    MainTitle.Text = hubname
    MainTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
    MainTitle.TextSize = 25.000
-   MainTitle.Visible = false
-
-   
-   lineY.Name = "lineY"
-   lineY.Parent = MainFrame
-   lineY.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-   lineY.Position = UDim2.new(0.304615378, 0, 0.00487804879, 0)
-   lineY.Size = UDim2.new(0, 0, 0, 400)
-   lineY.Visible = false
    
    MainFrameholder.Name = "MainFrameholder"
    MainFrameholder.Parent = MainFrame
@@ -224,7 +216,181 @@ function Mainholder:Window(hubname, gamename, discordlink, halflink)
    MainFrameholder.BackgroundTransparency = 1.000
    MainFrameholder.Position = UDim2.new(0.0153846154, 0, 0.160975605, 0)
    MainFrameholder.Size = UDim2.new(0, 178, 0, 283)
-   MainFrameholder.Visible = false
+   MainFrameholder.Visible = true
+
+   SettingsButton.Name = "SettingsButton"
+   SettingsButton.Parent = MainFrameholder
+   SettingsButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   SettingsButton.BackgroundTransparency = 1.000
+   SettingsButton.Position = UDim2.new(3.12026191, 0, -0.215547696, 0)
+   SettingsButton.Size = UDim2.new(0, 43, 0, 29)
+   SettingsButton.Font = Enum.Font.SourceSans
+   SettingsButton.Text = ""
+   SettingsButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+   SettingsButton.TextSize = 14.000
+   
+   ImageLabel.Parent = SettingsButton
+   ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   ImageLabel.BackgroundTransparency = 1.000
+   ImageLabel.Position = UDim2.new(0.282051295, 0, 0.172413796, 0)
+   ImageLabel.Size = UDim2.new(0, 20, 0, 20)
+   ImageLabel.Image = "http://www.roblox.com/asset/?id=6031104648"
+
+   local Toggled = false
+   SettingsButton.MouseButton1Click:Connect(function()
+      if Toggled == false then
+
+         --{2.455, 0},{-0.417, 0}
+         SettingsFrame.Visible = true
+         TweenService:Create(
+            SettingsFrame,
+            TweenInfo.new(.3, Enum.EasingStyle.Quad),
+            {Position = UDim2.new(2.455, 0, -0.417, 0)}
+         ):Play()
+         repeat wait() until SettingsFrame.Position == UDim2.new(2.455, 0, -0.417, 0)
+         Discord.Visible = true
+         MenuBtn.Visible = true
+         Toggled = true
+      else
+         Discord.Visible = false
+         MenuBtn.Visible = false
+         TweenService:Create(
+            SettingsFrame,
+            TweenInfo.new(.3, Enum.EasingStyle.Quad),
+            {Position = UDim2.new(2.455, 0, -0.195, 0)}
+         ):Play()
+         repeat task.wait() until SettingsFrame.Position == UDim2.new(2.455, 0, -0.195, 0)
+         SettingsFrame.Visible = false
+
+         Toggled = false
+      end
+   end)
+
+   SettingsFrame.Name = "SettingsFrame"
+   SettingsFrame.Parent = MainFrameholder
+   SettingsFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+   SettingsFrame.Position = UDim2.new(2.455, 0, -0.195, 0)
+   SettingsFrame.Size = UDim2.new(1, 0, -0.0212014131, 50)
+   SettingsFrame.Visible = false
+   
+   SettingsFrameCorner.CornerRadius = UDim.new(0, 6)
+   SettingsFrameCorner.Name = "SettingsFrameCorner"
+   SettingsFrameCorner.Parent = SettingsFrame
+
+
+   Discord.Name = "Discord"
+   Discord.Parent = SettingsFrame
+   Discord.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+   Discord.BackgroundTransparency = 1.000
+   Discord.Position = UDim2.new(-3.4289414e-07, 0, 0, 0)
+   Discord.Size = UDim2.new(1.00000072, 0, 0, 20)
+   Discord.Font = Enum.Font.Gotham
+   Discord.Text = "Discord"
+   Discord.TextColor3 = Color3.fromRGB(255, 255, 255)
+   Discord.TextSize = 13.000
+   Discord.TextTransparency = 0.400
+   Discord.TextXAlignment = Enum.TextXAlignment.Left
+   Discord.Visible = false
+   
+   DiscordCorner.CornerRadius = UDim.new(0, 6)
+   DiscordCorner.Name = "DiscordCorner"
+   DiscordCorner.Parent = Discord
+   
+   DiscordPadding.Name = "DiscordPadding"
+   DiscordPadding.Parent = Discord
+   DiscordPadding.PaddingLeft = UDim.new(0, 10)
+
+   Discord.MouseButton1Click:Connect(function()
+      Discord.TextSize = 10
+      TweenService:Create(Discord,TweenInfo.new(.1, Enum.EasingStyle.Quad),{TextSize = 13.000}):Play()
+      setclipboard("https://discord.gg/97anmxFpkU")
+      local req = (syn and syn.request) or (http and http.request) or http_request
+      if req then
+          req({
+              Url = 'http://127.0.0.1:6463/rpc?v=1',
+              Method = 'POST',
+              Headers = {
+                  ['Content-Type'] = 'application/json',
+                  Origin = 'https://discord.com'
+              },
+              Body = game:GetService('HttpService'):JSONEncode({
+                  cmd = 'INVITE_BROWSER',
+                  nonce = game:GetService('HttpService'):GenerateGUID(false),
+                  args = {code = '97anmxFpkU'}
+              })
+          })
+      end
+   end)
+
+
+   MenuBtn.Name = "MenuBtn"
+   MenuBtn.Parent = SettingsFrame
+   MenuBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+   MenuBtn.BackgroundTransparency = 1.000
+   MenuBtn.Position = UDim2.new(-3.4289414e-07, 0, 0.454545468, 0)
+   MenuBtn.Size = UDim2.new(1.00000072, 0, 0, 20)
+   MenuBtn.Font = Enum.Font.Gotham
+   MenuBtn.Text = "Settings (Comming Soon)"
+   MenuBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+   MenuBtn.TextSize = 13.000
+   MenuBtn.TextTransparency = 0.400
+   MenuBtn.TextXAlignment = Enum.TextXAlignment.Left
+   MenuBtn.Visible = false
+   
+   MenuBtnCorner.CornerRadius = UDim.new(0, 6)
+   MenuBtnCorner.Name = "MenuBtnCorner"
+   MenuBtnCorner.Parent = MenuBtn
+   
+   MenuBtnPadding.Name = "MenuBtnPadding"
+   MenuBtnPadding.Parent = MenuBtn
+   MenuBtnPadding.PaddingLeft = UDim.new(0, 10)
+
+   MenuBtn.MouseButton1Click:Connect(function()
+      MenuBtn.TextSize = 10
+      TweenService:Create(MenuBtn,TweenInfo.new(.1, Enum.EasingStyle.Quad),{TextSize = 13.000}):Play()
+   end)
+
+
+
+
+   SettingsFrameShadow.Name = "SettingsFrameShadow"
+   SettingsFrameShadow.Parent = SettingsFrame
+   SettingsFrameShadow.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   SettingsFrameShadow.BackgroundTransparency = 1.000
+   SettingsFrameShadow.Position = UDim2.new(-0.0168539323, 0, -0.727272749, 0)
+   SettingsFrameShadow.Size = UDim2.new(1, 0, -0.13636364, 50)
+   
+   SettingsFrameImage.Name = "SettingsFrameImage"
+   SettingsFrameImage.Parent = SettingsFrameShadow
+   SettingsFrameImage.AnchorPoint = Vector2.new(0.5, 0.5)
+   SettingsFrameImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   SettingsFrameImage.BackgroundTransparency = 1.000
+   SettingsFrameImage.BorderSizePixel = 0
+   SettingsFrameImage.Position = UDim2.new(0.505617976, 0, -0.409090936, 0)
+   SettingsFrameImage.Size = UDim2.new(1.20000005, 0, 1.20000005, 0)
+   SettingsFrameImage.Visible = false
+   SettingsFrameImage.ZIndex = 7
+   SettingsFrameImage.Image = "rbxassetid://5587865193"
+   SettingsFrameImage.ImageColor3 = Color3.fromRGB(0, 0, 0)
+   SettingsFrameImage.ImageTransparency = 0.900
+   
+   SettingsFrameImage_2.Name = "SettingsFrameImage"
+   SettingsFrameImage_2.Parent = SettingsFrameShadow
+   SettingsFrameImage_2.AnchorPoint = Vector2.new(0.5, 0.5)
+   SettingsFrameImage_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   SettingsFrameImage_2.BackgroundTransparency = 1.000
+   SettingsFrameImage_2.BorderSizePixel = 0
+   SettingsFrameImage_2.Position = UDim2.new(0.5, 0, -0.387454629, 0)
+   SettingsFrameImage_2.Size = UDim2.new(1.60000014, 0, 1.77963626, 0)
+   SettingsFrameImage_2.Visible = false
+   SettingsFrameImage_2.ZIndex = 7
+   SettingsFrameImage_2.Image = "rbxassetid://5587865193"
+   SettingsFrameImage_2.ImageColor3 = Color3.fromRGB(0, 0, 0)
+   SettingsFrameImage_2.ImageTransparency = 0.800
+   
+   SettingsFrameLayout.Name = "SettingsFrameLayout"
+   SettingsFrameLayout.Parent = SettingsFrame
+   SettingsFrameLayout.SortOrder = Enum.SortOrder.LayoutOrder
 
    ContainerHold.Name = "ContainerHold"
    ContainerHold.Parent = MainFrame
@@ -239,27 +405,8 @@ function Mainholder:Window(hubname, gamename, discordlink, halflink)
    DragFrame2.Position = UDim2.new(0, 0, 0.00253169355, 0)
    DragFrame2.Size = UDim2.new(0, 211, 0, 408)
 
-   DragFrame2_2.Name = "DragFrame2"
-   DragFrame2_2.Parent = MainFrame
-   DragFrame2_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-   DragFrame2_2.BackgroundTransparency = 1.000
-   DragFrame2_2.Position = UDim2.new(-0.354520649, 0, 0.00253169355, 0)
-   DragFrame2_2.Size = UDim2.new(0, 209, 0, 408)
-
    MakeDraggable(DragFrame2, MainFrame)
-   MakeDraggable(DragFrame2_2, MainFrame)
 
-
-   TaTitle.Name = "TaTitle"
-   TaTitle.Parent = LeftFrame
-   TaTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-   TaTitle.BackgroundTransparency = 1.000
-   TaTitle.Position = UDim2.new(0.113608718, 0, 0.0210487917, 0)
-   TaTitle.Size = UDim2.new(0, 159, 0, 20)
-   TaTitle.Font = Enum.Font.Gotham
-   TaTitle.Text = "Tabs"
-   TaTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-   TaTitle.TextSize = 25.000
 
    local MainFrameSearch = Instance.new("TextButton")
    local MainFrameSearchIcon = Instance.new("ImageLabel")
@@ -292,6 +439,7 @@ function Mainholder:Window(hubname, gamename, discordlink, halflink)
          ):Play()
          repeat wait() until MainFrameSearchBox.BackgroundTransparency == 0
          SearchMainToggled = true
+         MainFrameSearchBox.Visible = true
       else
          MainFrameSearchBox.PlaceholderText = ""
          TweenService:Create(
@@ -299,7 +447,7 @@ function Mainholder:Window(hubname, gamename, discordlink, halflink)
             TweenInfo.new(.3, Enum.EasingStyle.Quad),
             {BackgroundTransparency = 1}
          ):Play()
-         repeat wait() until MainFrameSearchBox.BackgroundTransparency == 1
+         repeat task.wait() until MainFrameSearchBox.BackgroundTransparency == 1
          SearchMainToggled = false
          MainFrameSearchBox.Visible = false
       end
@@ -313,8 +461,8 @@ function Mainholder:Window(hubname, gamename, discordlink, halflink)
    MainFrameSearchIcon.Position = UDim2.new(0.5, 0, 0.5, 0)
    MainFrameSearchIcon.Size = UDim2.new(0, 14, 0, 14)
    MainFrameSearchIcon.Image = "http://www.roblox.com/asset/?id=6521439400"
-   MainFrameSearchIcon.ImageTransparency = 1
-   MainFrameSearchIcon.Visible = false
+   MainFrameSearchIcon.ImageTransparency = 0
+   MainFrameSearchIcon.Visible = true
    
    MainFrameSearchBox.Name = "MainFrameSearchBox"
    MainFrameSearchBox.Parent = MainFrame
@@ -338,210 +486,8 @@ function Mainholder:Window(hubname, gamename, discordlink, halflink)
    
    MainFrameSearchBoxCorner.Name = "MainFrameSearchBoxCorner"
    MainFrameSearchBoxCorner.Parent = MainFrameSearchBox
-   
-   OpenClose.Name = "OpenClose"
-   OpenClose.Parent = MainFrameholder
-   OpenClose.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-   OpenClose.Position = UDim2.new(0.0321919285, 0, 0.0898051411, 0)
-   OpenClose.Size = UDim2.new(0, 170, 0, 40)
-   OpenClose.AutoButtonColor = false
-   OpenClose.Font = Enum.Font.Gotham
-   OpenClose.Text = "Hide Tabs"
-   OpenClose.TextColor3 = Color3.fromRGB(255, 255, 255)
-   OpenClose.TextSize = 20.000
 
-   OpenClose.MouseEnter:Connect(function()
-      TweenService:Create(
-         OpenClose,
-         TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {BackgroundColor3 = Color3.fromRGB(45, 45, 45)}
-      ):Play()
-   end)
-
-   OpenClose.MouseLeave:Connect(function()
-      TweenService:Create(
-         OpenClose,
-         TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {BackgroundColor3 = Color3.fromRGB(35, 35, 35)}
-      ):Play()
-   end)
-
-   OpenClose.MouseButton1Click:Connect(function()
-      OpenClose.TextSize = 0
-      TweenService:Create(
-         OpenClose,
-         TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {TextSize = 25.000}
-      ):Play()
-      TweenService:Create(
-         OpenClose,
-         TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {TextSize = 20.000}
-      ):Play()
-   end)
-
-   local TabHoToggled = false
-   OpenClose.MouseButton1Click:Connect(function()
-      if TabHoToggled == false then
-         OpenClose.Text = "Show Tabs"
-         TabHoToggled = true
-      else
-         OpenClose.Text = "Hide Tabs"
-         TabHoToggled = false
-      end
-   end)
-
-   OpenClose.MouseButton1Click:Connect(function()
-      if TabHoToggled == false then
-         TaTitle.Visible = false
-         TabHolder.Visible = false
-         Glow.Visible = false
-         TweenService:Create(
-            LeftFrame,
-            TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {Position = UDim2.new(0, 0, 0, 0)}
-         ):Play()
-      repeat wait() until LeftFrame.Position == UDim2.new(0, 0, 0, 0)
-      LeftFrame.Visible = false
-      else
-         LeftFrame.Visible = true
-         TweenService:Create(
-            LeftFrame,
-            TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {Position = UDim2.new(-0.354520649, 0, 0.00472821482, 0)}
-         ):Play()
-         repeat wait() until LeftFrame.Position == UDim2.new(-0.354520649, 0, 0.00472821482, 0)
-         
-         TabHolder.Visible = true
-         TaTitle.Visible = true
-         Glow.Visible = true
-      end
-   end)
-   
-   OpenCloseCorner.CornerRadius = UDim.new(0, 6)
-   OpenCloseCorner.Name = "OpenCloseCorner"
-   OpenCloseCorner.Parent = OpenClose
-   
-   Discord.Name = "Discord"
-   Discord.Parent = MainFrameholder
-   Discord.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-   Discord.Position = UDim2.new(0.0321919285, 0, 0.312419981, 0)
-   Discord.Size = UDim2.new(0, 170, 0, 40)
-   Discord.AutoButtonColor = false
-   Discord.Font = Enum.Font.Gotham
-   Discord.Text = "Discord"
-   Discord.TextColor3 = Color3.fromRGB(255, 255, 255)
-   Discord.TextSize = 20.000
-
-   Discord.MouseEnter:Connect(function()
-      TweenService:Create(
-         Discord,
-         TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {BackgroundColor3 = Color3.fromRGB(45, 45, 45)}
-      ):Play()
-   end)
-
-   Discord.MouseLeave:Connect(function()
-      TweenService:Create(
-         Discord,
-         TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {BackgroundColor3 = Color3.fromRGB(35, 35, 35)}
-      ):Play()
-   end)
-
-   Discord.MouseButton1Click:Connect(function()
-      Discord.TextSize = 0
-      TweenService:Create(
-         Discord,
-         TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {TextSize = 25.000}
-      ):Play()
-      TweenService:Create(
-         Discord,
-         TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {TextSize = 20.000}
-      ):Play()
-   end)
-
-   Discord.MouseButton1Click:Connect(function()
-      setclipboard(discordlink)
-            local req = (syn and syn.request) or (http and http.request) or http_request
-            if req then
-                req({
-                    Url = 'http://127.0.0.1:6463/rpc?v=1',
-                    Method = 'POST',
-                    Headers = {
-                        ['Content-Type'] = 'application/json',
-                        Origin = 'https://discord.com'
-                    },
-                    Body = game:GetService('HttpService'):JSONEncode({
-                        cmd = 'INVITE_BROWSER',
-                        nonce = game:GetService('HttpService'):GenerateGUID(false),
-                        args = {code = halflink}
-                    })
-                })
-            end
-   end)
-   
-   DiscordCorner.CornerRadius = UDim.new(0, 6)
-   DiscordCorner.Name = "DiscordCorner"
-   DiscordCorner.Parent = Discord
-   
-   ScriptHub.Name = "ScriptHub"
-   ScriptHub.Parent = MainFrameholder
-   ScriptHub.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-   ScriptHub.Position = UDim2.new(0.0321919285, 0, 0.526183844, 0)
-   ScriptHub.Size = UDim2.new(0, 170, 0, 40)
-   ScriptHub.AutoButtonColor = false
-   ScriptHub.Font = Enum.Font.Gotham
-   ScriptHub.Text = "ScriptHub"
-   ScriptHub.TextColor3 = Color3.fromRGB(255, 255, 255)
-   ScriptHub.TextSize = 20.000
-
-   ScriptHub.MouseEnter:Connect(function()
-      TweenService:Create(
-         ScriptHub,
-         TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {BackgroundColor3 = Color3.fromRGB(45, 45, 45)}
-      ):Play()
-   end)
-
-   ScriptHub.MouseLeave:Connect(function()
-      TweenService:Create(
-         ScriptHub,
-         TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {BackgroundColor3 = Color3.fromRGB(35, 35, 35)}
-      ):Play()
-   end)
-
-   ScriptHub.MouseButton1Click:Connect(function()
-      ScriptHub.TextSize = 0
-      TweenService:Create(
-         ScriptHub,
-         TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {TextSize = 25.000}
-      ):Play()
-      TweenService:Create(
-         ScriptHub,
-         TweenInfo.new(.3, Enum.EasingStyle.Quad),
-         {TextSize = 20.000}
-      ):Play()
-   end)
-
-   ScriptHub.MouseButton1Click:Connect(function()
-      if game.CoreGui:FindFirstChild("ScriptBloxSearcher") then
-         game:GetService("CoreGui").ScriptBloxSearcher.MainFrame.Visible = true
-     else
-         loadstring(game:HttpGet("https://pastebin.com/raw/JZs1kNAT"))()
-     end
-   end)
-   
-   ScriptHubCorner.CornerRadius = UDim.new(0, 6)
-   ScriptHubCorner.Name = "ScriptHubCorner"
-   ScriptHubCorner.Parent = ScriptHub
-   
-
-
+--[[
    Keybind.Name = "Keybind"
    Keybind.Parent = MainFrameholder
    Keybind.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
@@ -575,7 +521,65 @@ function Mainholder:Window(hubname, gamename, discordlink, halflink)
    BindText.Font = Enum.Font.SourceSans
    BindText.Text = "Rightcontrol"
    BindText.TextColor3 = Color3.fromRGB(255, 255, 255)
-   BindText.TextSize = 18.000
+   BindText.TextSize = 18.000]]
+
+   local Bind = Instance.new("TextButton")
+   local Title = Instance.new("TextLabel")
+   local Desc = Instance.new("TextLabel")
+   local BText = Instance.new("TextLabel")
+
+   Bind.Name = "Bind"
+   Bind.Parent = MainSettingsContainer
+   Bind.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+   Bind.BackgroundTransparency = 1.000
+   Bind.Position = UDim2.new(0.0567428395, 0, 0.16803278, 0)
+   Bind.Size = UDim2.new(0.909923851, 0, 0, 34)
+   Bind.AutoButtonColor = false
+   Bind.Font = Enum.Font.SourceSans
+   Bind.TextColor3 = Color3.fromRGB(0, 0, 0)
+   Bind.TextSize = 14.000
+   Bind.TextTransparency = 1.000
+   Bind.TextXAlignment = Enum.TextXAlignment.Left
+   
+   Title.Name = "Title"
+   Title.Parent = Bind
+   Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   Title.BackgroundTransparency = 1.000
+   Title.Position = UDim2.new(0, 13, 0, 0)
+   Title.Size = UDim2.new(0.287203521, 1, 0.5, 0)
+   Title.Font = Enum.Font.Gotham
+   Title.Text = "Close Bind"
+   Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+   Title.TextSize = 14.000
+   Title.TextXAlignment = Enum.TextXAlignment.Left
+   
+   Desc.Name = "Desc"
+   Desc.Parent = Bind
+   Desc.AnchorPoint = Vector2.new(0, 1)
+   Desc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   Desc.BackgroundTransparency = 1.000
+   Desc.Position = UDim2.new(0.0175838899, 5, 1.11764705, 0)
+   Desc.Size = UDim2.new(0.589060307, 1, 0.5, 0)
+   Desc.Font = Enum.Font.Gotham
+   Desc.Text = "Hides/Shows the main window."
+   Desc.TextColor3 = Color3.fromRGB(255, 255, 255)
+   Desc.TextSize = 12.000
+   Desc.TextTransparency = 0.400
+   Desc.TextXAlignment = Enum.TextXAlignment.Left
+   
+   BText.Name = "BText"
+   BText.Parent = Bind
+   BText.AnchorPoint = Vector2.new(1, 0)
+   BText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   BText.BackgroundTransparency = 1.000
+   BText.Position = UDim2.new(1, -5, 0, 0)
+   BText.Selectable = true
+   BText.Size = UDim2.new(0, 1, 0, 32)
+   BText.Font = Enum.Font.Gotham
+   BText.Text = "RightControl"
+   BText.TextColor3 = Color3.fromRGB(255, 255, 255)
+   BText.TextSize = 14.000
+   BText.TextXAlignment = Enum.TextXAlignment.Right
 
    local keybind_data = {}
 
@@ -615,7 +619,7 @@ local UIS = game:GetService('UserInputService')
 
          function keybind_data:SetKeybind(Keybind)
             local key = shortkeys[Keybind.Name] or Keybind.Name
-            BindText.Text = key
+            BText.Text = key
             keybind = Keybind
          end
   
@@ -635,201 +639,249 @@ local UIS = game:GetService('UserInputService')
          keybind_data:SetKeybind(keybind_options.standard)
 
 
-   Keybind.MouseButton1Click:Connect(function()
+         Bind.MouseButton1Click:Connect(function()
             if checks.binding then return end
-            BindText.Text = "[...]"
+            BText.Text = "[...]"
             checks.binding = true
             local a, b = UIS.InputBegan:Wait()
             keybind_data:SetKeybind(a.KeyCode)
     end)
 
-
+    getgenv().Toggled = false
     local uitoggled = false
   UserInputService.InputBegan:Connect(
    function(io, p)
-      if io.KeyCode == Enum.KeyCode[game:GetService("CoreGui").woof.MainFrame.MainFrameholder.Keybind.BindText.Text] then
+      if io.KeyCode == Enum.KeyCode[game:GetService("CoreGui").woof.MainSettingsFrame.MainSettingsContainer.Bind.BText.Text] then
          if uitoggled == false then
-            TaTitle.Visible = false
-            TabHolder.Visible = false
-            Glow.Visible = false
-            ContainerHold.Visible = false
-            MainFrameSearchBox.PlaceholderText = ""
-            spawn(function()
-               TweenService:Create(
-                  MainFrameSearchIcon,
-                  TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                  {ImageTransparency = 1}
-               ):Play()
-               repeat wait() until MainFrameSearchIcon.ImageTransparency == 1
-               MainFrameSearchIcon.Visible = false
-               TweenService:Create(
-                  MainFrameSearchBox,
-                  TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                  {BackgroundTransparency = 1}
-               ):Play()
-            end)
-            TweenService:Create(
-               LeftFrame,
-               TweenInfo.new(.3, Enum.EasingStyle.Quad),
-            {Position = UDim2.new(0, 0, 0, 0)}
-            ):Play()
-            repeat wait() until LeftFrame.Position == UDim2.new(0, 0, 0, 0)
-
-            LeftFrame.Visible = false
-            MainFrameholder.Visible = false
-            GameTitle.Visible = false
-            MainTitle.Visible = false
-            lineY.Visible = false
-
-            MainFrame:TweenSize(
-               UDim2.new(0, 650, 0, 0),
-               Enum.EasingDirection.In,
-               Enum.EasingStyle.Quad,
-               0.3,
-               false
-            )
-            repeat wait() until MainFrame.Size == UDim2.new(0, 650, 0, 0)
-
-            MainFrame:TweenSize(
-               UDim2.new(0, 0, 0, 0),
-               Enum.EasingDirection.In,
-               Enum.EasingStyle.Quad,
-               0.3,
-               false
-            )
-            spawn(function()
-               TweenService:Create(
-                  game.CoreGui.backiground.BackgroundFrame,
-                  TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                  {BackgroundTransparency = 1}
-               ):Play()
-            end)
-
-            if game.CoreGui:FindFirstChild("backiground") then
-               TweenService:Create(
-                  game.CoreGui.backiground.BackgroundFrame,
-                  TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                  {BackgroundTransparency = 1}
-              ):Play()
-            end
-            repeat wait() until MainFrame.Size == UDim2.new(0, 0, 0, 0)
-            
             MainFrame.Visible = false
+
+            MainSettingsContainer.Visible = false
+            MainSettingsTitle.Visible = false
+            MainSettingsFrameClose.Visible = false
+            TweenService:Create(
+               MainSettingsFrame,
+               TweenInfo.new(.3, Enum.EasingStyle.Quad),
+               {BackgroundTransparency = 1}
+            ):Play()
+
+            repeat wait() until MainSettingsFrame.BackgroundTransparency == 1
+            MainSettingsFrame.Visible = false
+            getgenv().Toggled = false
             uitoggled = true
          else
-
             MainFrame.Visible = true
-
-            spawn(function()
-               TweenService:Create(
-                  MainFrameSearchIcon,
-                  TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                  {ImageTransparency = 0.400}
-               ):Play()
-               repeat wait() until MainFrameSearchIcon.ImageTransparency == 0.400
-               MainFrameSearchIcon.Visible = true
-            end)
-
-            MainFrame:TweenSize(
-               UDim2.new(0, 650, 0, 0),
-               Enum.EasingDirection.In,
-               Enum.EasingStyle.Quad,
-               0.3,
-               false
-            )
-            spawn(function()
-               TweenService:Create(
-                  game.CoreGui.backiground.BackgroundFrame,
-                  TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                  {BackgroundTransparency = 0.6}
-               ):Play()
-            end)
-
-            repeat wait() until MainFrame.Size == UDim2.new(0, 650, 0, 0)
-
-            MainFrame:TweenSize(
-               UDim2.new(0, 650, 0, 410),
-               Enum.EasingDirection.In,
-               Enum.EasingStyle.Quad,
-               0.3,
-               false
-            )
-            if game.CoreGui:FindFirstChild("backiground") then
-               TweenService:Create(
-                  game.CoreGui.backiground.BackgroundFrame,
-                  TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                  {BackgroundTransparency = 0.6}
-              ):Play()
-            end
-            repeat wait() until MainFrame.Size == UDim2.new(0, 650, 0, 410)
-
-            MainFrameSearchBox.PlaceholderText = "Search"
-            TweenService:Create(
-               MainFrameSearchBox,
-               TweenInfo.new(.3, Enum.EasingStyle.Quad),
-               {BackgroundTransparency = 0}
-            ):Play()
-
-            LeftFrame.Visible = true
-            MainFrameholder.Visible = true
-            GameTitle.Visible = true
-            MainTitle.Visible = true
-            lineY.Visible = true
-
-            TweenService:Create(
-               LeftFrame,
-               TweenInfo.new(.3, Enum.EasingStyle.Quad),
-            {Position = UDim2.new(-0.354520649, 0, 0.00472821482, 0)}
-            ):Play()
-            repeat wait() until LeftFrame.Position == UDim2.new(-0.354520649, 0, 0.00472821482, 0)
-            TabHolder.Visible = true
-            TaTitle.Visible = true
-            Glow.Visible = true
-            ContainerHold.Visible = true
-            MainFrameSearchIcon.Visible = true
-
             uitoggled = false
          end
          end
          end)
 
 
-   TweenService:Create(
-      MainFrame,
-      TweenInfo.new(.3, Enum.EasingStyle.Quad),
-      {Size = UDim2.new(0, 650, 0, 0)}
-   ):Play()
+         MenuBtn.MouseButton1Click:Connect(function()
+            if getgenv().Toggled == false then
+            MainSettingsFrame.Visible = true
+            TweenService:Create(
+               MainSettingsFrame,
+               TweenInfo.new(.3, Enum.EasingStyle.Quad),
+               {BackgroundTransparency = 0}
+            ):Play()
 
-   repeat wait() until MainFrame.Size == UDim2.new(0, 650, 0, 0)
-   TweenService:Create(
-      MainFrame,
-      TweenInfo.new(.3, Enum.EasingStyle.Quad),
-      {Size = UDim2.new(0, 650, 0, 410)}
-   ):Play()
-   repeat wait() until MainFrame.Size == UDim2.new(0, 650, 0, 410)
-   LeftFrame.Visible = true
-   TweenService:Create(
-      LeftFrame,
-      TweenInfo.new(.3, Enum.EasingStyle.Quad),
-   {Position = UDim2.new(-0.354520649, 0, 0.00472821482, 0)}
-   ):Play()
-   repeat wait() until LeftFrame.Position == UDim2.new(-0.354520649, 0, 0.00472821482, 0)
-   MainFrameholder.Visible = true
-   GameTitle.Visible = true
-   MainTitle.Visible = true
-   lineY.Visible = true
-   MainFrameSearchIcon.Visible = true
-   MainFrameSearchBox.PlaceholderText = "Search"
-   TweenService:Create(
-      MainFrameSearchIcon,
-      TweenInfo.new(.3, Enum.EasingStyle.Quad),
-      {ImageTransparency = 0.400}
-   ):Play()
-   TweenService:Create(
-      MainFrameSearchBox,
-      TweenInfo.new(.3, Enum.EasingStyle.Quad),
-      {BackgroundTransparency = 0}
-   ):Play()
+            repeat wait() until MainSettingsFrame.BackgroundTransparency == 0
+
+            MainSettingsContainer.Visible = true
+            MainSettingsTitle.Visible = true
+            MainSettingsFrameClose.Visible = true
+
+            getgenv().Toggled = true
+            else
+               MainSettingsContainer.Visible = false
+               MainSettingsTitle.Visible = false
+               MainSettingsFrameClose.Visible = false
+               TweenService:Create(
+                  MainSettingsFrame,
+                  TweenInfo.new(.3, Enum.EasingStyle.Quad),
+                  {BackgroundTransparency = 1}
+               ):Play()
+   
+               repeat wait() until MainSettingsFrame.BackgroundTransparency == 1
+               MainSettingsFrame.Visible = false
+               getgenv().Toggled = false
+         end
+         end)
+
+   MainSettingsFrame.Name = "MainSettingsFrame"
+   MainSettingsFrame.Parent = woof
+   MainSettingsFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+   MainSettingsFrame.Position = UDim2.new(0.118236467, 0, 0.325320512, 0)
+   MainSettingsFrame.Size = UDim2.new(0, 389, 0, 297)
+   MainSettingsFrame.BackgroundTransparency = 1.000
+   MainSettingsFrame.Visible = false
+   
+   MainSettingsDragFrame.Name = "MainSettingsDragFrame"
+   MainSettingsDragFrame.Parent = MainSettingsFrame
+   MainSettingsDragFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   MainSettingsDragFrame.BackgroundTransparency = 1.000
+   MainSettingsDragFrame.Size = UDim2.new(0, 389, 0, 45)
+
+   MakeDraggable(MainSettingsDragFrame, MainSettingsFrame)
+   
+   MainSettingsFrameCorner.Name = "MainSettingsFrameCorner"
+   MainSettingsFrameCorner.Parent = MainSettingsFrame
+
+   MainSettingsFrameClose.Name = "MainSettingsFrameClose"
+   MainSettingsFrameClose.Parent = MainSettingsFrame
+   MainSettingsFrameClose.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   MainSettingsFrameClose.BackgroundTransparency = 1.000
+   MainSettingsFrameClose.Position = UDim2.new(0.915167093, 0, 0.0134680131, 0)
+   MainSettingsFrameClose.Size = UDim2.new(0, 31, 0, 26)
+   MainSettingsFrameClose.Image = "rbxassetid://6031094678"
+   MainSettingsFrameClose.Visible = false
+
+   MainSettingsFrameClose.MouseButton1Click:Connect(function()
+      MainSettingsContainer.Visible = false
+      MainSettingsTitle.Visible = false
+      MainSettingsFrameClose.Visible = false
+      TweenService:Create(
+         MainSettingsFrame,
+         TweenInfo.new(.3, Enum.EasingStyle.Quad),
+         {BackgroundTransparency = 1}
+      ):Play()
+
+      repeat wait() until MainSettingsFrame.BackgroundTransparency == 1
+      MainSettingsFrame.Visible = false
+      getgenv().Toggled = false
+   end)
+   
+   MainSettingsContainer.Name = "MainSettingsContainer"
+   MainSettingsContainer.Parent = MainSettingsFrame
+   MainSettingsContainer.Active = true
+   MainSettingsContainer.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   MainSettingsContainer.BackgroundTransparency = 1.000
+   MainSettingsContainer.BorderSizePixel = 0
+   MainSettingsContainer.Position = UDim2.new(0.0205655526, 0, 0.151515156, 0)
+   MainSettingsContainer.Size = UDim2.new(0, 375, 0, 244)
+   MainSettingsContainer.ScrollBarThickness = 8
+   MainSettingsContainer.Visible = false
+
+   MainSettingsContainerLayout.Name = "MainSettingsContainerLayout"
+   MainSettingsContainerLayout.Parent = MainSettingsContainer
+   MainSettingsContainerLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+   MainSettingsContainerLayout.SortOrder = Enum.SortOrder.LayoutOrder
+   MainSettingsContainerLayout.Padding = UDim.new(0, 5)
+   
+   MainSettingsTitle.Name = "MainSettingsTitle"
+   MainSettingsTitle.Parent = MainSettingsFrame
+   MainSettingsTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   MainSettingsTitle.BackgroundTransparency = 1.000
+   MainSettingsTitle.BorderColor3 = Color3.fromRGB(27, 42, 53)
+   MainSettingsTitle.Size = UDim2.new(0, 389, 0, 50)
+   MainSettingsTitle.Font = Enum.Font.Gotham
+   MainSettingsTitle.Text = "Settings"
+   MainSettingsTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+   MainSettingsTitle.TextSize = 30.000
+   MainSettingsTitle.Visible = false
+
+
+
+      function Mainholder:SToggle(text, default, callback)
+         local Toggled = default or false
+
+         local LoadGUI = Instance.new("TextButton")
+         local LoadGUITitle = Instance.new("TextLabel")
+         local LoadGUICorner = Instance.new("UICorner")
+         local LoadGUIImage = Instance.new("ImageLabel")
+
+         LoadGUI.Name = "LoadGUI"
+         LoadGUI.Parent = MainSettingsContainer
+         LoadGUI.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+         LoadGUI.BorderColor3 = Color3.fromRGB(22, 188, 10)
+         LoadGUI.Size = UDim2.new(0, 341, 0, 36)
+         LoadGUI.Font = Enum.Font.SourceSans
+         LoadGUI.Text = ""
+         LoadGUI.TextColor3 = Color3.fromRGB(0, 0, 0)
+         LoadGUI.TextSize = 14.000
+         LoadGUI.AutoButtonColor = false
+         
+         LoadGUITitle.Name = "LoadGUITitle"
+         LoadGUITitle.Parent = LoadGUI
+         LoadGUITitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+         LoadGUITitle.BackgroundTransparency = 1.000
+         LoadGUITitle.Position = UDim2.new(0.0381231681, 0, 0, 0)
+         LoadGUITitle.Size = UDim2.new(0, 328, 0, 36)
+         LoadGUITitle.Font = Enum.Font.Gotham
+         LoadGUITitle.Text = text
+         LoadGUITitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+         LoadGUITitle.TextSize = 14.000
+         LoadGUITitle.TextXAlignment = Enum.TextXAlignment.Left
+         
+         LoadGUICorner.CornerRadius = UDim.new(0, 4)
+         LoadGUICorner.Name = "LoadGUICorner"
+         LoadGUICorner.Parent = LoadGUI
+         
+         LoadGUIImage.Name = "LoadGUIImage"
+         LoadGUIImage.Parent = LoadGUI
+         LoadGUIImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+         LoadGUIImage.BackgroundTransparency = 1.000
+         LoadGUIImage.Position = UDim2.new(0.894428134, 0, 0.166666672, 0)
+         LoadGUIImage.Size = UDim2.new(0, 28, 0, 24)
+         LoadGUIImage.Image = "rbxassetid://6031068420"
+         LoadGUIImage.ImageColor3 = Color3.fromRGB(9, 164, 195)
+         LoadGUIImage.ImageTransparency = 0
+         
+         --rbxassetid://6031068421
+         
+         LoadGUI.MouseEnter:Connect(function()
+             TweenService:Create(
+                 LoadGUI,
+                 TweenInfo.new(.3, Enum.EasingStyle.Quad),
+                 {BackgroundColor3 = Color3.fromRGB(20, 20, 20)}
+             ):Play()
+         end)
+         
+         LoadGUI.MouseLeave:Connect(function()
+             TweenService:Create(
+                 LoadGUI,
+                 TweenInfo.new(.3, Enum.EasingStyle.Quad),
+                 {BackgroundColor3 = Color3.fromRGB(25, 25, 25)}
+             ):Play()
+         end)
+         
+
+         LoadGUI.MouseButton1Click:Connect(function()
+             if Toggled == false then
+             TweenService:Create(
+                 LoadGUIImage,
+                 TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                 {ImageTransparency = 1}
+             ):Play()
+             repeat task.wait() until LoadGUIImage.ImageTransparency == 1
+             LoadGUIImage.Image = "rbxassetid://6031068421"
+             LoadGUIImage.ImageColor3 = Color3.fromRGB(29, 222, 3)
+             TweenService:Create(
+                 LoadGUIImage,
+                 TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                 {ImageTransparency = 0}
+             ):Play()
+
+             else
+                 TweenService:Create(
+                     LoadGUIImage,
+                     TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                     {ImageTransparency = 1}
+                 ):Play()
+                 repeat task.wait() until LoadGUIImage.ImageTransparency == 1
+                 LoadGUIImage.Image = "rbxassetid://6031068420"
+                 LoadGUIImage.ImageColor3 = Color3.fromRGB(9, 164, 195)
+                 TweenService:Create(
+                     LoadGUIImage,
+                     TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
+                     {ImageTransparency = 0}
+                 ):Play()
+
+         end
+         Toggled = not Toggled
+         pcall(callback, Toggled)
+         end)
+      end
 
 local Tabs = {}
 function Tabs:Tab(Title)
@@ -850,7 +902,7 @@ function Tabs:Tab(Title)
    Tab.Text = ""
    Tab.TextColor3 = Color3.fromRGB(0, 0, 0)
    Tab.TextSize = 15.000
-   Tab.BackgroundTransparency = 1.000
+   Tab.BackgroundTransparency = 1
    
    TabCorner.CornerRadius = UDim.new(0, 3)
    TabCorner.Name = "TabCorner"
@@ -904,6 +956,7 @@ function Tabs:Tab(Title)
          function()
             for i, v in next, ContainerHold:GetChildren() do
                if v.ClassName == "ScrollingFrame" then
+                  fuckit = v
                   v.Visible = false
                end
             end
@@ -928,7 +981,7 @@ function Tabs:Tab(Title)
 function UpdateResoults()
 	local search = string.lower(MainFrameSearchBox.Text)
 	for i,v in pairs(Container:GetChildren()) do
-		if v.ClassName ~= "UIListLayout" and v.ClassName == "TextButton" then
+		if v.ClassName ~= "UIListLayout" and v.ClassName ~= "Frame" then
 			if search ~= "" then
 				local item = string.lower(v.Name)
 				if string.find(item, search) then
@@ -941,7 +994,7 @@ function UpdateResoults()
 			end
 		end
 	end
-   print("changed")
+
 end
 
 MainFrameSearchBox.Changed:Connect(UpdateResoults)
@@ -1879,6 +1932,8 @@ function ContainerItems:Toggle(title, Default, callback)
    ToggleDotCorner.Name = "ToggleDotCorner"
    ToggleDotCorner.Parent = ToggleDot
 
+   
+
    Toggle.MouseEnter:Connect(function()
       TweenService:Create(
          Toggle,
@@ -1899,7 +1954,8 @@ function ContainerItems:Toggle(title, Default, callback)
       ToggleDot.Position = UDim2.new(-0.05, -3, 0.243545532, -4)
    else
       ToggleDot.Position = UDim2.new(0.595001221, -3, 0.243545532, -4)
-      pcall(callback, Toggled)
+      
+         pcall(callback, Toggled)
    end
 
    Toggle.MouseButton1Click:Connect(function()
@@ -1917,7 +1973,8 @@ function ContainerItems:Toggle(title, Default, callback)
          ):Play()
       end
       Toggled = not Toggled
-      pcall(callback, Toggled)
+      
+         pcall(callback, Toggled)
    end)
    Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 end
