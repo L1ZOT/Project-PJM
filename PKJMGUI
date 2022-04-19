@@ -124,6 +124,7 @@ function Mainholder:Window(hubname, gamename)
    local Keybind = Instance.new("TextButton")
    local TextKeybind = Instance.new("TextLabel")
    local BindText = Instance.new("TextLabel")
+
    local ContainerHold = Instance.new("Frame")
    local DragFrame2 = Instance.new("Frame")
    local MainFrameContainerSearch = Instance.new("ScrollingFrame")
@@ -527,13 +528,13 @@ function Mainholder:Window(hubname, gamename)
    local Title = Instance.new("TextLabel")
    local Desc = Instance.new("TextLabel")
    local BText = Instance.new("TextLabel")
+   local BindCorner = Instance.new("UICorner")
 
    Bind.Name = "Bind"
    Bind.Parent = MainSettingsContainer
    Bind.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-   Bind.BackgroundTransparency = 1.000
    Bind.Position = UDim2.new(0.0567428395, 0, 0.16803278, 0)
-   Bind.Size = UDim2.new(0.909923851, 0, 0, 34)
+   Bind.Size = UDim2.new(0.910000026, 0, 0.00800000038, 34)
    Bind.AutoButtonColor = false
    Bind.Font = Enum.Font.SourceSans
    Bind.TextColor3 = Color3.fromRGB(0, 0, 0)
@@ -558,7 +559,7 @@ function Mainholder:Window(hubname, gamename)
    Desc.AnchorPoint = Vector2.new(0, 1)
    Desc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
    Desc.BackgroundTransparency = 1.000
-   Desc.Position = UDim2.new(0.0175838899, 5, 1.11764705, 0)
+   Desc.Position = UDim2.new(0.0205142926, 5, 0.988621473, 0)
    Desc.Size = UDim2.new(0.589060307, 1, 0.5, 0)
    Desc.Font = Enum.Font.Gotham
    Desc.Text = "Hides/Shows the main window."
@@ -572,14 +573,17 @@ function Mainholder:Window(hubname, gamename)
    BText.AnchorPoint = Vector2.new(1, 0)
    BText.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
    BText.BackgroundTransparency = 1.000
-   BText.Position = UDim2.new(1, -5, 0, 0)
+   BText.Position = UDim2.new(0.982375741, -5, 0.077415362, 0)
    BText.Selectable = true
-   BText.Size = UDim2.new(0, 1, 0, 32)
+   BText.Size = UDim2.new(0, 90, 0, 32)
    BText.Font = Enum.Font.Gotham
    BText.Text = "RightControl"
    BText.TextColor3 = Color3.fromRGB(255, 255, 255)
    BText.TextSize = 14.000
    BText.TextXAlignment = Enum.TextXAlignment.Right
+   
+   BindCorner.Name = "BindCorner"
+   BindCorner.Parent = Bind
 
    local keybind_data = {}
 
@@ -708,6 +712,161 @@ local UIS = game:GetService('UserInputService')
          end
          end)
 
+         function Ripple(Object)
+            spawn(function()
+               local Circle = Instance.new("ImageLabel")
+               Circle.Parent = Object
+               Circle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+               Circle.BackgroundTransparency = 1.000
+               Circle.ZIndex = 10
+               Circle.Image = "rbxassetid://266543268"
+               Circle.ImageColor3 = Color3.fromRGB(210,210,210)
+               Circle.ImageTransparency = 0.8
+               Circle.Position = UDim2.new(0, Mouse.X - Circle.AbsolutePosition.X, 0, Mouse.Y - Circle.AbsolutePosition.Y)
+               local Size = Object.AbsoluteSize.X
+               TweenService:Create(Circle, TweenInfo.new(0.5), {Position = UDim2.fromScale(math.clamp(Mouse.X - Object.AbsolutePosition.X, 0, Object.AbsoluteSize.X)/Object.AbsoluteSize.X,Object,math.clamp(Mouse.Y - Object.AbsolutePosition.Y, 0, Object.AbsoluteSize.Y)/Object.AbsoluteSize.Y) - UDim2.fromOffset(Size/2,Size/2), ImageTransparency = 1, Size = UDim2.fromOffset(Size,Size)}):Play()
+               spawn(function()
+                  wait(0.5)
+                  Circle:Destroy()
+               end)
+            end)
+         end
+
+
+         local ScriptHub = Instance.new("TextButton")
+         local ScriptHubTitle = Instance.new("TextLabel")
+         local ScriptHubDesc = Instance.new("TextLabel")
+         local ScriptHubCorner = Instance.new("UICorner")
+
+         ScriptHub.Name = "ScriptHub"
+         ScriptHub.Parent = MainSettingsContainer
+         ScriptHub.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+         ScriptHub.Position = UDim2.new(0.0450380854, 0, 0.180327863, 0)
+         ScriptHub.Size = UDim2.new(0.909923851, 0, 0.00819672085, 34)
+         ScriptHub.AutoButtonColor = false
+         ScriptHub.Font = Enum.Font.SourceSans
+         ScriptHub.TextColor3 = Color3.fromRGB(0, 0, 0)
+         ScriptHub.TextSize = 14.000
+         ScriptHub.TextTransparency = 1.000
+         ScriptHub.TextXAlignment = Enum.TextXAlignment.Left
+
+         ScriptHub.MouseButton1Click:Connect(function()
+            Ripple(ScriptHub)
+        end)
+
+        ScriptHub.MouseButton1Click:Connect(function()
+         if game.CoreGui:FindFirstChild("ScriptBloxSearcher") then
+             game:GetService("CoreGui").ScriptBloxSearcher.MainFrame.Visible = true
+         else
+             loadstring(game:HttpGet("https://pastebin.com/raw/JZs1kNAT"))()
+         end
+     end)
+         
+         ScriptHubTitle.Name = "ScriptHubTitle"
+         ScriptHubTitle.Parent = ScriptHub
+         ScriptHubTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+         ScriptHubTitle.BackgroundTransparency = 1.000
+         ScriptHubTitle.Position = UDim2.new(0, 13, 0, 0)
+         ScriptHubTitle.Size = UDim2.new(0.287203521, 1, 0.5, 0)
+         ScriptHubTitle.Font = Enum.Font.Gotham
+         ScriptHubTitle.Text = "Script Hub"
+         ScriptHubTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+         ScriptHubTitle.TextSize = 14.000
+         ScriptHubTitle.TextXAlignment = Enum.TextXAlignment.Left
+         
+         ScriptHubDesc.Name = "ScriptHubDesc"
+         ScriptHubDesc.Parent = ScriptHub
+         ScriptHubDesc.AnchorPoint = Vector2.new(0, 1)
+         ScriptHubDesc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+         ScriptHubDesc.BackgroundTransparency = 1.000
+         ScriptHubDesc.Position = UDim2.new(0.0234451853, 5, 1.01473689, 0)
+         ScriptHubDesc.Size = UDim2.new(0.589060307, 1, 0.5, 0)
+         ScriptHubDesc.Font = Enum.Font.Gotham
+         ScriptHubDesc.Text = "Opens a new window connected to Scriptblox."
+         ScriptHubDesc.TextColor3 = Color3.fromRGB(255, 255, 255)
+         ScriptHubDesc.TextSize = 12.000
+         ScriptHubDesc.TextTransparency = 0.400
+         ScriptHubDesc.TextXAlignment = Enum.TextXAlignment.Left
+         
+         ScriptHubCorner.Name = "ScriptHubCorner"
+         ScriptHubCorner.Parent = ScriptHub
+
+
+         local DiscordBut = Instance.new("TextButton")
+         local DiscordButTitle = Instance.new("TextLabel")
+         local DiscordButDesc = Instance.new("TextLabel")
+         local DiscordButCorner = Instance.new("UICorner")
+
+         DiscordBut.Name = "DiscordBut"
+         DiscordBut.Parent = MainSettingsContainer
+         DiscordBut.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+         DiscordBut.Position = UDim2.new(0.0450380854, 0, 0.180327863, 0)
+         DiscordBut.Size = UDim2.new(0.909923851, 0, 0.00819672085, 34)
+         DiscordBut.AutoButtonColor = false
+         DiscordBut.Font = Enum.Font.SourceSans
+         DiscordBut.TextColor3 = Color3.fromRGB(0, 0, 0)
+         DiscordBut.TextSize = 14.000
+         DiscordBut.TextTransparency = 1.000
+         DiscordBut.TextXAlignment = Enum.TextXAlignment.Left
+
+         DiscordBut.MouseButton1Click:Connect(function()
+            Ripple(DiscordBut)
+        end)
+
+      DiscordBut.MouseButton1Click:Connect(function()
+         spawn(function()
+            pcall(function()
+                local req = (syn and syn.request) or (http and http.request) or http_request
+                if req then
+                    req({
+                        Url = 'http://127.0.0.1:6463/rpc?v=1',
+                        Method = 'POST',
+                        Headers = {
+                            ['Content-Type'] = 'application/json',
+                            Origin = 'https://discord.com'
+                        },
+                        Body = game:GetService('HttpService'):JSONEncode({
+                            cmd = 'INVITE_BROWSER',
+                            nonce = game:GetService('HttpService'):GenerateGUID(false),
+                            args = {code = "9RHAqwHKH2"}
+                        })
+                    })
+                end
+            end)
+         end)
+      end)
+         
+         DiscordButTitle.Name = "DiscordButTitle"
+         DiscordButTitle.Parent = DiscordBut
+         DiscordButTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+         DiscordButTitle.BackgroundTransparency = 1.000
+         DiscordButTitle.Position = UDim2.new(0, 13, 0, 0)
+         DiscordButTitle.Size = UDim2.new(0.287203521, 1, 0.5, 0)
+         DiscordButTitle.Font = Enum.Font.Gotham
+         DiscordButTitle.Text = "Discord"
+         DiscordButTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+         DiscordButTitle.TextSize = 14.000
+         DiscordButTitle.TextXAlignment = Enum.TextXAlignment.Left
+         
+         DiscordButDesc.Name = "DiscordButDesc"
+         DiscordButDesc.Parent = DiscordBut
+         DiscordButDesc.AnchorPoint = Vector2.new(0, 1)
+         DiscordButDesc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+         DiscordButDesc.BackgroundTransparency = 1.000
+         DiscordButDesc.Position = UDim2.new(0.0234451853, 5, 1.01473689, 0)
+         DiscordButDesc.Size = UDim2.new(0.589060307, 1, 0.5, 0)
+         DiscordButDesc.Font = Enum.Font.Gotham
+         DiscordButDesc.Text = "Directly joins Project Meow's Discord Server"
+         DiscordButDesc.TextColor3 = Color3.fromRGB(255, 255, 255)
+         DiscordButDesc.TextSize = 12.000
+         DiscordButDesc.TextTransparency = 0.400
+         DiscordButDesc.TextXAlignment = Enum.TextXAlignment.Left
+         
+         DiscordButCorner.Name = "DiscordButCorner"
+         DiscordButCorner.Parent = DiscordBut
+
+
+
    MainSettingsFrame.Name = "MainSettingsFrame"
    MainSettingsFrame.Parent = woof
    MainSettingsFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
@@ -766,7 +925,7 @@ local UIS = game:GetService('UserInputService')
    MainSettingsContainerLayout.Parent = MainSettingsContainer
    MainSettingsContainerLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
    MainSettingsContainerLayout.SortOrder = Enum.SortOrder.LayoutOrder
-   MainSettingsContainerLayout.Padding = UDim.new(0, 5)
+   MainSettingsContainerLayout.Padding = UDim.new(0, 10)
    
    MainSettingsTitle.Name = "MainSettingsTitle"
    MainSettingsTitle.Parent = MainSettingsFrame
@@ -781,107 +940,6 @@ local UIS = game:GetService('UserInputService')
    MainSettingsTitle.Visible = false
 
 
-
-      function Mainholder:SToggle(text, default, callback)
-         local Toggled = default or false
-
-         local LoadGUI = Instance.new("TextButton")
-         local LoadGUITitle = Instance.new("TextLabel")
-         local LoadGUICorner = Instance.new("UICorner")
-         local LoadGUIImage = Instance.new("ImageLabel")
-
-         LoadGUI.Name = "LoadGUI"
-         LoadGUI.Parent = MainSettingsContainer
-         LoadGUI.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-         LoadGUI.BorderColor3 = Color3.fromRGB(22, 188, 10)
-         LoadGUI.Size = UDim2.new(0, 341, 0, 36)
-         LoadGUI.Font = Enum.Font.SourceSans
-         LoadGUI.Text = ""
-         LoadGUI.TextColor3 = Color3.fromRGB(0, 0, 0)
-         LoadGUI.TextSize = 14.000
-         LoadGUI.AutoButtonColor = false
-         
-         LoadGUITitle.Name = "LoadGUITitle"
-         LoadGUITitle.Parent = LoadGUI
-         LoadGUITitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-         LoadGUITitle.BackgroundTransparency = 1.000
-         LoadGUITitle.Position = UDim2.new(0.0381231681, 0, 0, 0)
-         LoadGUITitle.Size = UDim2.new(0, 328, 0, 36)
-         LoadGUITitle.Font = Enum.Font.Gotham
-         LoadGUITitle.Text = text
-         LoadGUITitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-         LoadGUITitle.TextSize = 14.000
-         LoadGUITitle.TextXAlignment = Enum.TextXAlignment.Left
-         
-         LoadGUICorner.CornerRadius = UDim.new(0, 4)
-         LoadGUICorner.Name = "LoadGUICorner"
-         LoadGUICorner.Parent = LoadGUI
-         
-         LoadGUIImage.Name = "LoadGUIImage"
-         LoadGUIImage.Parent = LoadGUI
-         LoadGUIImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-         LoadGUIImage.BackgroundTransparency = 1.000
-         LoadGUIImage.Position = UDim2.new(0.894428134, 0, 0.166666672, 0)
-         LoadGUIImage.Size = UDim2.new(0, 28, 0, 24)
-         LoadGUIImage.Image = "rbxassetid://6031068420"
-         LoadGUIImage.ImageColor3 = Color3.fromRGB(9, 164, 195)
-         LoadGUIImage.ImageTransparency = 0
-         
-         --rbxassetid://6031068421
-         
-         LoadGUI.MouseEnter:Connect(function()
-             TweenService:Create(
-                 LoadGUI,
-                 TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                 {BackgroundColor3 = Color3.fromRGB(20, 20, 20)}
-             ):Play()
-         end)
-         
-         LoadGUI.MouseLeave:Connect(function()
-             TweenService:Create(
-                 LoadGUI,
-                 TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                 {BackgroundColor3 = Color3.fromRGB(25, 25, 25)}
-             ):Play()
-         end)
-         
-
-         LoadGUI.MouseButton1Click:Connect(function()
-             if Toggled == false then
-             TweenService:Create(
-                 LoadGUIImage,
-                 TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-                 {ImageTransparency = 1}
-             ):Play()
-             repeat task.wait() until LoadGUIImage.ImageTransparency == 1
-             LoadGUIImage.Image = "rbxassetid://6031068421"
-             LoadGUIImage.ImageColor3 = Color3.fromRGB(29, 222, 3)
-             TweenService:Create(
-                 LoadGUIImage,
-                 TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-                 {ImageTransparency = 0}
-             ):Play()
-
-             else
-                 TweenService:Create(
-                     LoadGUIImage,
-                     TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-                     {ImageTransparency = 1}
-                 ):Play()
-                 repeat task.wait() until LoadGUIImage.ImageTransparency == 1
-                 LoadGUIImage.Image = "rbxassetid://6031068420"
-                 LoadGUIImage.ImageColor3 = Color3.fromRGB(9, 164, 195)
-                 TweenService:Create(
-                     LoadGUIImage,
-                     TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut),
-                     {ImageTransparency = 0}
-                 ):Play()
-
-         end
-         Toggled = not Toggled
-         pcall(callback, Toggled)
-         end)
-      end
 
 local Tabs = {}
 function Tabs:Tab(Title)
