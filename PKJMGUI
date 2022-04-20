@@ -429,6 +429,7 @@ function Mainholder:Window(hubname, gamename)
    MainFrameSearch.TextSize = 14.000
 
    local SearchMainToggled = false
+
    MainFrameSearch.MouseButton1Click:Connect(function()
       if SearchMainToggled == false then
          MainFrameSearchBox.PlaceholderText = "Search"
@@ -651,29 +652,85 @@ local UIS = game:GetService('UserInputService')
             keybind_data:SetKeybind(a.KeyCode)
     end)
 
-    getgenv().Toggled = false
+    local settingsToggled = nil
+    MenuBtn.MouseButton1Click:Connect(function()
+      settingsToggled = false
+   end)
     local uitoggled = false
   UserInputService.InputBegan:Connect(
    function(io, p)
       if io.KeyCode == Enum.KeyCode[game:GetService("CoreGui").woof.MainSettingsFrame.MainSettingsContainer.Bind.BText.Text] then
          if uitoggled == false then
-            MainFrame.Visible = false
+            spawn(function()
+               if settingsToggled == false then
+                  MainSettingsContainer.Visible = false
+                  MainSettingsTitle.Visible = false
+                  MainSettingsFrameClose.Visible = false
+                  TweenService:Create(
+                     MainSettingsFrame,
+                     TweenInfo.new(.3, Enum.EasingStyle.Quad),
+                     {BackgroundTransparency = 1}
+                  ):Play()
+      
+                  repeat wait() until MainSettingsFrame.BackgroundTransparency == 1
+                  MainSettingsFrame.Visible = false
+                  settingsToggled = true
+               end
+            end)
 
-            MainSettingsContainer.Visible = false
-            MainSettingsTitle.Visible = false
-            MainSettingsFrameClose.Visible = false
+            ContainerHold.Visible = false
+            MainFrameholder.Visible = false
+            LeftFrame.Visible = false
+            GameTitle.Visible = false
+            MainTitle.Visible = false
+            MainFrameSearch.Visible = false
+            MainFrameSearchBox.Visible = false
+
             TweenService:Create(
-               MainSettingsFrame,
+               MainFrame,
                TweenInfo.new(.3, Enum.EasingStyle.Quad),
                {BackgroundTransparency = 1}
             ):Play()
 
-            repeat wait() until MainSettingsFrame.BackgroundTransparency == 1
-            MainSettingsFrame.Visible = false
-            getgenv().Toggled = false
+            repeat wait() until MainFrame.BackgroundTransparency == 1
+            MainFrame.Visible = false
             uitoggled = true
          else
+
+            spawn(function()
+               if settingsToggled == true then
+                  MainSettingsFrame.Visible = true
+                  TweenService:Create(
+                     MainSettingsFrame,
+                     TweenInfo.new(.3, Enum.EasingStyle.Quad),
+                     {BackgroundTransparency = 0}
+                  ):Play()
+      
+                  repeat wait() until MainSettingsFrame.BackgroundTransparency == 0
+                  MainSettingsContainer.Visible = true
+                  MainSettingsTitle.Visible = true
+                  MainSettingsFrameClose.Visible = true
+                  settingsToggled = false
+               end
+            end)
+
             MainFrame.Visible = true
+
+            TweenService:Create(
+               MainFrame,
+               TweenInfo.new(.3, Enum.EasingStyle.Quad),
+               {BackgroundTransparency = 0}
+            ):Play()
+
+            repeat wait() until MainFrame.BackgroundTransparency == 0
+            ContainerHold.Visible = true
+            MainFrameholder.Visible = true
+            LeftFrame.Visible = true
+            GameTitle.Visible = true
+            MainTitle.Visible = true
+            MainFrameSearch.Visible = true
+            MainFrameSearchBox.Visible = true
+
             uitoggled = false
          end
          end
@@ -681,7 +738,6 @@ local UIS = game:GetService('UserInputService')
 
 
          MenuBtn.MouseButton1Click:Connect(function()
-            if getgenv().Toggled == false then
             MainSettingsFrame.Visible = true
             TweenService:Create(
                MainSettingsFrame,
@@ -694,22 +750,6 @@ local UIS = game:GetService('UserInputService')
             MainSettingsContainer.Visible = true
             MainSettingsTitle.Visible = true
             MainSettingsFrameClose.Visible = true
-
-            getgenv().Toggled = true
-            else
-               MainSettingsContainer.Visible = false
-               MainSettingsTitle.Visible = false
-               MainSettingsFrameClose.Visible = false
-               TweenService:Create(
-                  MainSettingsFrame,
-                  TweenInfo.new(.3, Enum.EasingStyle.Quad),
-                  {BackgroundTransparency = 1}
-               ):Play()
-   
-               repeat wait() until MainSettingsFrame.BackgroundTransparency == 1
-               MainSettingsFrame.Visible = false
-               getgenv().Toggled = false
-         end
          end)
 
          function Ripple(Object)
@@ -904,10 +944,9 @@ local UIS = game:GetService('UserInputService')
          TweenInfo.new(.3, Enum.EasingStyle.Quad),
          {BackgroundTransparency = 1}
       ):Play()
-
       repeat wait() until MainSettingsFrame.BackgroundTransparency == 1
       MainSettingsFrame.Visible = false
-      getgenv().Toggled = false
+      settingsToggled = nil
    end)
    
    MainSettingsContainer.Name = "MainSettingsContainer"
