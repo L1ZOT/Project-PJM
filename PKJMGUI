@@ -2319,7 +2319,7 @@ ChecklistSearch.Changed:Connect(UpdateResoults)
       ChecklistItemCheck.Position = UDim2.new(0.898372591, 0, 0.0833333358, 0)
       ChecklistItemCheck.Size = UDim2.new(0, 28, 0, 20)
       ChecklistItemCheck.Image = "rbxassetid://6031068420"
-      ChecklistItemCheck.ImageColor3 = Color3.fromRGB(16, 192, 255)
+      ChecklistItemCheck.ImageColor3 = Color3.fromRGB(236, 136, 36)
 
       ChecklistItem.MouseEnter:Connect(
          function()
@@ -2346,11 +2346,11 @@ ChecklistSearch.Changed:Connect(UpdateResoults)
       ChecklistItem.MouseButton1Click:Connect(function()
       if table.find(checklists[glob].Value, v) then
         table.remove(checklists[glob].Value, table.find(checklists[glob].Value, v))
-        ChecklistTitle.Text = text .. " - " .. table.concat(checklists[glob].Value, ", ")
+        --ChecklistTitle.Text = text .. " - " .. table.concat(checklists[glob].Value, ", ")
         callback(checklists[glob].Value)
      else
         table.insert(checklists[glob].Value, v)
-        ChecklistTitle.Text = text .. " - " .. table.concat(checklists[glob].Value, ", ")
+        --ChecklistTitle.Text = text .. " - " .. table.concat(checklists[glob].Value, ", ")
         callback(checklists[glob].Value)
      end
    end)
@@ -2466,7 +2466,7 @@ ChecklistSearch.Changed:Connect(UpdateResoults)
       ChecklistItemCheck.Position = UDim2.new(0.898372591, 0, 0.0833333358, 0)
       ChecklistItemCheck.Size = UDim2.new(0, 28, 0, 20)
       ChecklistItemCheck.Image = "rbxassetid://6031068420"
-      ChecklistItemCheck.ImageColor3 = Color3.fromRGB(16, 192, 255)
+      ChecklistItemCheck.ImageColor3 = Color3.fromRGB(236, 136, 36)
 
       ChecklistItem.MouseEnter:Connect(
          function()
