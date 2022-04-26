@@ -1,4 +1,4 @@
-local VLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/L1ZOT/Project-PJM/main/PKJMGUI"))()
+local VLib = loadstring(game:HttpGet("https://gitlab.com/L1ZOT/test-project/-/raw/main/PJM-GUI"))()
 local Win = VLib:Window("Project Meow", "Speed of Legends")
 local Main = Win:Tab("Main")
 local Autofarm = Win:Tab("Autofarm")
@@ -172,13 +172,17 @@ end)
 
 
 
-Credits:Button("LeadMarker#1219 & Brizzy#9999", function()
+Credits:Button("LeadMarker#1219 & Karma#9368", function()
    
     setclipboard("https://discord.gg/97anmxFpkU")
     
 end) 
 
 Credits:Button("Mana#9724 & Septex#9788 (he is very hot)", function()
+    setclipboard("https://discord.gg/97anmxFpkU")
+end)
+
+Credits:Button("UI Designer: Luke Marcus#4347", function()
     setclipboard("https://discord.gg/97anmxFpkU")
 end)
 
