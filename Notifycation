@@ -47,6 +47,7 @@ function MainHold:Notify(text, discription, img)
    MainFrame.BackgroundColor3 = Color3.fromRGB(29, 29, 29)
    MainFrame.Position = UDim2.new(-0.219626144, 0, 0.715116322, 0)
    MainFrame.Size = UDim2.new(1.21962595, 0, 0.284883738, 0)
+   MainFrame.ZIndex = 99
    
    MainFrameCorner.CornerRadius = UDim.new(0, 5)
    MainFrameCorner.Name = "MainFrameCorner"
