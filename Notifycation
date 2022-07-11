@@ -1,4 +1,4 @@
-local UwU = {}
+
 
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -6,241 +6,135 @@ local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 
-function UwU:Notify(text, discription)
-local Notifaction = Instance.new("ScreenGui")
-local Message = Instance.new("Frame")
-local MessageLine = Instance.new("TextLabel")
-local MessageLineCorner = Instance.new("UICorner")
-local MessageName = Instance.new("TextLabel")
-local MessageCorner = Instance.new("UICorner")
-local Discription = Instance.new("TextLabel")
-local closeButton = Instance.new("TextButton")
-local closeButtonCorner = Instance.new("UICorner")
 
-Notifaction.Name = "Notifaction"
-Notifaction.Parent = game.CoreGui
- 
-Message.Name = "Message"
-Message.Parent = Notifaction
-Message.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-Message.Position = UDim2.new(0.0059760958, 0, 0.700247109, 0)
-Message.Size = UDim2.new(0, 0, 0, 0)
 
-MessageLine.Name = "MessageLine"
-MessageLine.Parent = Message
-MessageLine.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-MessageLine.BorderSizePixel = 0
-MessageLine.Position = UDim2.new(0.0212765727, 0, 0.51111114, 0)
-MessageLine.Size = UDim2.new(0, 0, 0, 0)
-MessageLine.Font = Enum.Font.SourceSans
-MessageLine.Text = ""
-MessageLine.TextColor3 = Color3.fromRGB(0, 0, 0)
-MessageLine.TextScaled = true
-MessageLine.TextSize = 14.000
-MessageLine.TextWrapped = true
- --0, 501, 0, 8
-MessageLineCorner.Name = "MessageLineCorner"
-MessageLineCorner.Parent = MessageLine
- 
-MessageName.Name = "MessageName"
-MessageName.Parent = Message
-MessageName.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-MessageName.BackgroundTransparency = 1.000
-MessageName.BorderColor3 = Color3.fromRGB(255, 255, 255)
-MessageName.BorderSizePixel = 0
-MessageName.Position = UDim2.new(0.0212765727, 0, 0, 0)
-MessageName.Size = UDim2.new(0, 0, 0, 0)
-MessageName.Font = Enum.Font.GothamBold
-MessageName.Text = text
-MessageName.TextColor3 = Color3.fromRGB(255, 255, 255)
-MessageName.TextSize = 54.000
-MessageName.TextWrapped = true
-MessageName.Visible = false
- --0, 507, 0, 58
-MessageCorner.Name = "MessageCorner"
-MessageCorner.Parent = Message
- 
-Discription.Name = "Discription"
-Discription.Parent = Message
-Discription.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-Discription.BackgroundTransparency = 1.000
-Discription.Position = UDim2.new(0.0212765727, 0, 0.626035988, 0)
-Discription.Size = UDim2.new(0, 0, 0, 0)
-Discription.Font = Enum.Font.Gotham
-Discription.Text = discription
-Discription.TextColor3 = Color3.fromRGB(255, 255, 255)
-Discription.TextSize = 18.000
-Discription.Visible = false
- --0, 501, 0, 43
- 
-closeButton.Name = "closeButton"
-closeButton.Parent = Message
-closeButton.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-closeButton.Position = UDim2.new(0.900919974, 0, 0, 0)
-closeButton.Size = UDim2.new(0, 51, 0, 45)
-closeButton.Font = Enum.Font.Gotham
-closeButton.Text = "X"
-closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-closeButton.TextScaled = false
-closeButton.TextSize = 30
-closeButton.TextWrapped = false
-closeButton.AutoButtonColor = false
-closeButton.Visible = false
- 
-closeButtonCorner.Name = "closeButtonCorner"
-closeButtonCorner.Parent = closeButton
- 
-closeButton.MouseEnter:Connect(function()
+local MainHold = {}
+   
+      local PJMNotify = Instance.new("ScreenGui")
+      PJMNotify.Name = "PJMNotify"
+      PJMNotify.Parent = game.CoreGui
+      PJMNotify.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+function MainHold:Notify(text, discription, img)
+
+   local HolderFrame = Instance.new("Frame")
+   local HolderFrameLayout = Instance.new("UIListLayout")
+   local MainFrame = Instance.new("Frame")
+   local MainFrameCorner = Instance.new("UICorner")
+   local PJMImage = Instance.new("ImageLabel")
+   local PJMImageCorner = Instance.new("UICorner")
+   local PJMTitle = Instance.new("TextLabel")
+   local PJMDesc = Instance.new("TextLabel")
+   local TimeFrame = Instance.new("Frame")
+   local TimeFrameCorner = Instance.new("UICorner")
+   
+   HolderFrame.Name = "HolderFrame"
+   HolderFrame.Parent = game.CoreGui:FindFirstChild("PJMNotify")
+   HolderFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   HolderFrame.BackgroundTransparency = 1.000
+   HolderFrame.Position = UDim2.new(0.844646633, 0, 0.485636115, 0)
+   HolderFrame.Size = UDim2.new(0.14975509, 0, 0.470588207, 0)
+   
+   HolderFrameLayout.Name = "HolderFrameLayout"
+   HolderFrameLayout.Parent = HolderFrame
+   HolderFrameLayout.HorizontalAlignment = Enum.HorizontalAlignment.Right
+   HolderFrameLayout.SortOrder = Enum.SortOrder.LayoutOrder
+   HolderFrameLayout.VerticalAlignment = Enum.VerticalAlignment.Bottom
+   HolderFrameLayout.Padding = UDim.new(0, 5)
+   
+   MainFrame.Name = "MainFrame"
+   MainFrame.Parent = game.CoreGui.PJMNotify:FindFirstChild("HolderFrame")
+   MainFrame.BackgroundColor3 = Color3.fromRGB(29, 29, 29)
+   MainFrame.Position = UDim2.new(-0.219626144, 0, 0.715116322, 0)
+   MainFrame.Size = UDim2.new(1.21962595, 0, 0.284883738, 0)
+   
+   MainFrameCorner.CornerRadius = UDim.new(0, 5)
+   MainFrameCorner.Name = "MainFrameCorner"
+   MainFrameCorner.Parent = MainFrame
+   
+   PJMImage.Name = "PJMImage"
+   PJMImage.Parent = MainFrame
+   PJMImage.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   PJMImage.BackgroundTransparency = 1.000
+   PJMImage.Position = UDim2.new(0.0344827585, 0, 0.163265303, 0)
+   PJMImage.Size = UDim2.new(0.260536402, 0, 0.673469365, 0)
+   PJMImage.Image = img or ""
+   
+   PJMImageCorner.CornerRadius = UDim.new(0, 5)
+   PJMImageCorner.Name = "PJMImageCorner"
+   PJMImageCorner.Parent = PJMImage
+   
+   PJMTitle.Name = "PJMTitle"
+   PJMTitle.Parent = MainFrame
+   PJMTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   PJMTitle.BackgroundTransparency = 1.000
+   PJMTitle.Position = UDim2.new(0.541121364, 0, 0.0695263371, 0)
+   PJMTitle.Size = UDim2.new(0.165342644, 0, 0.168849692, 0)
+   PJMTitle.Font = Enum.Font.Gotham
+   PJMTitle.Text = text or "Project Meow"
+   PJMTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+   PJMTitle.TextSize = 17.000
+   
+   PJMDesc.Name = "PJMDesc"
+   PJMDesc.Parent = MainFrame
+   PJMDesc.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   PJMDesc.BackgroundTransparency = 1.000
+   PJMDesc.Position = UDim2.new(0.507301271, 0, 0.427090406, 0)
+   PJMDesc.Size = UDim2.new(0.232982814, 0, 0.139052689, 0)
+   PJMDesc.Font = Enum.Font.Gotham
+   PJMDesc.Text = discription or "your text here!"
+   PJMDesc.TextColor3 = Color3.fromRGB(255, 255, 255)
+   PJMDesc.TextSize = 14.000
+   
+   TimeFrame.Name = "TimeFrame"
+   TimeFrame.Parent = MainFrame
+   TimeFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+   TimeFrame.BackgroundTransparency = 0.750
+   TimeFrame.Position = UDim2.new(0.0409998819, 0, 0.909864724, 0)
+   TimeFrame.Size = UDim2.new(0.925369203, 0, 0.0397293456, 0)
+   
+   TimeFrameCorner.CornerRadius = UDim.new(0, 2)
+   TimeFrameCorner.Name = "TimeFrameCorner"
+   TimeFrameCorner.Parent = TimeFrame
+
+   if PJMImage.Image == "" then
+      PJMDesc.Position = UDim2.new(0.383307576, 0, 0.405625135, 0)
+      PJMTitle.Position = UDim2.new(0.417127669, 0, 0.0909916162, 0)
+   end
+
    TweenService:Create(
-      closeButton,
+      TimeFrame,
+      TweenInfo.new(9, Enum.EasingStyle.Quad),
+      {Size = UDim2.new(0, 0, 0.0397293419, 0)}
+  ):Play()
+
+  repeat task.wait() until TimeFrame.Size == UDim2.new(0, 0, 0.0397293419, 0)
+
+  PJMTitle.Visible = false
+  PJMDesc.Visible = false
+  PJMImage.Visible = false
+  TimeFrame.Visible = false
+
+  TweenService:Create(
+      MainFrame,
       TweenInfo.new(.3, Enum.EasingStyle.Quad),
-      {BackgroundColor3 = Color3.fromRGB(40,40,40)}
-   ):Play()
-end)
- 
-closeButton.MouseLeave:Connect(function()
-   TweenService:Create(
-      closeButton,
-      TweenInfo.new(.3, Enum.EasingStyle.Quad),
-      {BackgroundColor3 = Color3.fromRGB(35,35,35)}
-   ):Play()
-end)
- 
-closeButton.MouseButton1Click:Connect(function()
-   closeButton.TextSize = 10
-   TweenService:Create(
-      closeButton,
-      TweenInfo.new(.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-      {TextSize = 30}
-   ):Play()
+      {BackgroundTransparency = 1}
+  ):Play()
 
+  repeat task.wait() until MainFrame.BackgroundTransparency == 1
 
-   TweenService:Create(
-   MessageLine,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 0, 0, 8)}
-):Play()
-repeat task.wait() until MessageLine.Size == UDim2.new(0, 0, 0, 8)
-   TweenService:Create(
-   MessageName,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 0, 0, 58)}
-):Play()
-closeButton.Visible = false
-TweenService:Create(
-   Discription,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 0, 0, 43)}
-):Play()
-repeat task.wait() until Discription.Size == UDim2.new(0, 0, 0, 43)
-MessageName.Visible = false
-Discription.Visible = false
- 
-TweenService:Create(
-   Message,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 0, 0, 135)}
-):Play()
- 
-repeat wait() until Message.Size == UDim2.new(0, 0, 0, 135)
-game.CoreGui.Notifaction:Destroy()
-end)
- 
- 
- 
- 
-TweenService:Create(
-   Message,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 0, 0, 135)}
-):Play()
- 
-repeat wait() until Message.Size == UDim2.new(0, 0, 0, 135)
- 
-TweenService:Create(
-   Message,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 519, 0, 135)}
-):Play()
- 
-repeat wait() until Message.Size == UDim2.new(0, 519, 0, 135)
-MessageName.Visible = true
-Discription.Visible = true
-closeButton.Visible = true
- 
-TweenService:Create(
-   MessageLine,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 0, 0, 8)}
-):Play()
- 
-TweenService:Create(
-   MessageName,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 0, 0, 58)}
-):Play()
- 
-TweenService:Create(
-   Discription,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 0, 0, 43)}
-):Play()
- 
-repeat wait() until MessageLine.Size == UDim2.new(0, 0, 0, 8)
- 
-TweenService:Create(
-   MessageLine,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 501, 0, 8)}
-):Play()
- 
-TweenService:Create(
-   MessageName,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 507, 0, 58)}
-):Play()
- 
-TweenService:Create(
-   Discription,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 501, 0, 43)}
-):Play()
- 
-repeat wait() until MessageLine.Size == UDim2.new(0, 501, 0, 8)
- 
-TweenService:Create(
-   MessageLine,
-   TweenInfo.new(20, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 0, 0, 8)}
-):Play()
- 
-repeat wait() until MessageLine.Size == UDim2.new(0, 0, 0, 8)
-TweenService:Create(
-   MessageName,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 0, 0, 58)}
-):Play()
-closeButton.Visible = false
- 
-TweenService:Create(
-   Discription,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 0, 0, 43)}
-):Play()
-repeat task.wait() until Discription.Size == UDim2.new(0, 0, 0, 43)
-MessageName.Visible = false
-Discription.Visible = false
- 
-TweenService:Create(
-   Message,
-   TweenInfo.new(.2, Enum.EasingStyle.Quad),
-   {Size = UDim2.new(0, 0, 0, 135)}
-):Play()
- 
-repeat wait() until Message.Size == UDim2.new(0, 0, 0, 135)
-game.CoreGui.Notifaction:Destroy()
+  MainFrame:Destroy()
+  
+    for i,v in pairs(game.CoreGui:FindFirstChild("PJMNotify"):GetChildren()) do
+        if not v:FindFirstChild("MainFrame") then
+            v:Destroy()
+        end
+    end
+    for i,v in pairs(game.CoreGui:GetChildren()) do
+        if v.Name == "PJMNotify" and not v:FindFirstChild("HolderFrame") then
+            v:Destroy()
+        end
+    end
 end
- 
-return UwU
 
---UwU:Notify("Test", "hello world!")
+return MainHold
