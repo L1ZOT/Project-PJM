@@ -132,7 +132,7 @@ function MainHold:Notify(text, discription, img)
         end
     end
     for i,v in pairs(game.CoreGui:GetChildren()) do
-        if v.Name == "PJMNotify" and not v:FindFirstChild("HolderFrame") then
+        if not v:FindFirstChild("HolderFrame") then
             v:Destroy()
         end
     end
