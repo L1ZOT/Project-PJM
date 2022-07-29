@@ -131,11 +131,11 @@ function MainHold:Notify(text, discription, img)
             v:Destroy()
         end
     end
-    for i,v in pairs(game.CoreGui:GetChildren()) do
-        if not v:FindFirstChild("HolderFrame") then
-            v:Destroy()
-        end
-    end
+    -- for i,v in pairs(game.CoreGui:GetChildren()) do
+    --     if not v:FindFirstChild("HolderFrame") then
+    --         v:Destroy()
+    --     end
+    -- end
 end
 
 return MainHold
